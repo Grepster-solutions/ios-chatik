@@ -22,6 +22,7 @@ final class AuthRequestFactory: AbstractRequestFactory {
         requestOptions: AuthRequestRouter,
         completion: @escaping (Result<T, Error>) -> Void) where T : Codable {
         self.request(requestOptions).responseJSON { (response) in
+            print("---- response: \(response) ----")
             guard let statusCode = response.response?.statusCode else {
                 if case let .failure(error) = response.result, let urlError = error.underlyingError as? URLError {
                     switch urlError.code {
@@ -37,6 +38,7 @@ final class AuthRequestFactory: AbstractRequestFactory {
                 }
                 return
             }
+            print("---- statusCode: \(statusCode) ----")
             switch statusCode {
             case 200 ... 399:
                 if let data = response.data {
@@ -84,6 +86,7 @@ final class AuthRequestFactory: AbstractRequestFactory {
                 }
                 return
             }
+            print("---- statusCode: \(statusCode) ----")
             switch statusCode {
             case 200 ... 399:
                 completion(.success(true))

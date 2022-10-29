@@ -21,7 +21,7 @@ public enum AuthRequestRouter: AbstractRequestRouter {
     var path: String {
         switch self {
         case .signUp:
-            return "api/\(Constants.apiVersion)/signup"
+            return "\(Constants.apiVersion)/signup"
         }
     }
     
@@ -54,6 +54,7 @@ public enum AuthRequestRouter: AbstractRequestRouter {
         case .signUp(let parameters):
             urlRequest = try CustomPatchEncding().encode(urlRequest, with: parameters)
         }
+        print("---- urlRequest: \(urlRequest) ----")
         return urlRequest
     }
 }

@@ -20,7 +20,7 @@ class ChatViewController: UIViewController {
         
         setupLayout()
         
-        tableView.register(ChatListCell.self, forCellReuseIdentifier: "ChatListCell")
+        tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.identifier)
         tableView.dataSource = self
          
     }
@@ -40,12 +40,11 @@ class ChatViewController: UIViewController {
 }
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("asdasd numberOfRowsInSection")
         return mockChatList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as? ChatListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListCell.identifier) as? ChatListCell else {
             return UITableViewCell()
         }
         let chat = mockChatList[indexPath.row]

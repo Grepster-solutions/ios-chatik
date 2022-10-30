@@ -25,11 +25,16 @@ class ChatListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        logoImageView.layer.cornerRadius = logoImageView.frame.height / 2
+    }
+    
     func setup(message: String?, time: Int?, name: String, logoUrl: URL?) {
         messageLabel.text = message
-        timeLabel.text = "22:05"
+        timeLabel.text = "22:35"
         nameLabel.text = name
-        logoImageView.backgroundColor = .red
+        logoImageView.backgroundColor = .green
     }
     
     private func setupLayout() {
@@ -64,4 +69,3 @@ class ChatListCell: UITableViewCell {
     }
     
 }
-

@@ -7,14 +7,7 @@
 
 import Foundation
 
-struct Chat {
-    
-    struct LastMessage {
-        let message: String
-        let isMy: Bool
-//        let time: Int
-    }
-    
+struct Chat {    
     let companion: User
     let lastMessage: LastMessage?
     let chatLogo: URL?

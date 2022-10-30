@@ -11,5 +11,5 @@ struct Constants {
     
     static let apiVersion = "1.0"
     
-    static let baseUrl = "http://vm-328bc6e7.na4u.ru/"
+    static let baseUrl = "https://api.grepster.ru/"
 }

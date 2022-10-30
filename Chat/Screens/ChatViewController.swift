@@ -9,7 +9,7 @@ import UIKit
 
 class ChatViewController: UIViewController {
 
-    private let mockChatList = Chat.mock
+    private var chatList = [Chat]()
     
     let tableView = UITableView()
     
@@ -22,7 +22,10 @@ class ChatViewController: UIViewController {
         
         tableView.register(ChatListCell.self, forCellReuseIdentifier: ChatListCell.identifier)
         tableView.dataSource = self
-         
+        ChatService.getChatList { [weak self] chatList in
+            self?.chatList = chatList
+            self?.tableView.reloadData()
+        }
     }
     
     
@@ -40,15 +43,15 @@ class ChatViewController: UIViewController {
 }
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mockChatList.count
+        return chatList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListCell.identifier) as? ChatListCell else {
             return UITableViewCell()
         }
-        let chat = mockChatList[indexPath.row]
-        cell.setup(message: chat.lastMessage?.message, time: nil, name: chat.companion.name, logoUrl: chat.chatLogo)
+        let chat = chatList[indexPath.row]
+        cell.setup(message: chat.lastMessage?.message, time: nil, name: chat.companions.first?.name ?? "", logoUrl: chat.chatLogo)
         return cell
     }
         

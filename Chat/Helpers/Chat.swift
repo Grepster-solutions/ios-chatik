@@ -7,43 +7,26 @@
 
 import Foundation
 
-struct Chat {    
-    let companion: User
+struct Chat: Codable {
+    let uuid: UUID
+    let companions: [User]
     let lastMessage: LastMessage?
     let chatLogo: URL?
+
+    private enum CodingKeys: String, CodingKey {
+        case uuid = "id"
+        case companions
+        case chatLogo = "chat_logo"
+        case lastMessage = "last_message"
+    }
+    
 }
 
-extension Chat {
-    static var mock = [
-        Chat(companion: User(uuid: UUID(),
-                             name: "Pavel",
-                             email: "smka@mail.ru",
-                             phone: "898899988822"),
-             lastMessage:LastMessage(message: "hi", isMy: false),
-                             chatLogo: nil),
-        Chat(companion: User(uuid: UUID(),
-                             name: "User3452",
-                             email: "zzq@mail.ru",
-                             phone: "89995553535"),
-             lastMessage:LastMessage(message: "Вам повестка", isMy: false),
-                             chatLogo: nil),
-        Chat(companion: User(uuid: UUID(),
-                             name: "Военком",
-                             email: "sddd@mail.ru",
-                             phone: "900"),
-             lastMessage:LastMessage(message: "не гасись", isMy: false),
-                             chatLogo: nil),
-        Chat(companion: User(uuid: UUID(),
-                             name: "Ment_s_lubaynki",
-                             email: "dps@mail.ru",
-                             phone: "02"),
-             lastMessage:LastMessage(message: "open the door", isMy: false),
-                             chatLogo: nil),
-        Chat(companion: User(uuid: UUID(),
-                             name: "Pavel(2)",
-                             email: "smka@mail.ru",
-                             phone: "898899988822"),
-             lastMessage:LastMessage(message: "pamagiti", isMy: true),
-                             chatLogo: nil),
-    ]
+struct ChatListResult: Codable {
+    let chatList: [Chat]
+    
+    private enum CodingKeys: String, CodingKey {
+        case chatList = "chat_list"
+    }
 }
+ 

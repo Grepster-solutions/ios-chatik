@@ -211,9 +211,9 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        presenter?.signUp(name: name,
-                          email: email,
-                          password: password)
+        presenter.signUp(name: name,
+                         email: email,
+                         password: password)
     }
 }
 

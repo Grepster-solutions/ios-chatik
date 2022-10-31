@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LastMessage {
+struct LastMessage: Codable {
     let message: String
     let isMy: Bool
 //        let time: Int

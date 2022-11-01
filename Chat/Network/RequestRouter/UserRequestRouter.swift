@@ -1,38 +1,39 @@
 //
-//  AuthRequestRouter.swift
+//  UserRequestRouter.swift
 //  Chat
 //
-//  Created by Дарья on 26.10.2022.
+//  Created by Дарья on 31.10.2022.
 //
 
 import UIKit
 import Alamofire
 
-public enum AuthRequestRouter: AbstractRequestRouter {
-    case signUp(parameters: Parameters)
-    case login(parameters: Parameters)
+public enum UserRequestRouter: AbstractRequestRouter {
+    case getCurrentUser
     
     var method: HTTPMethod {
         switch self {
-        case .signUp, .login:
-            return .post
+        case .getCurrentUser:
+            return .get
         }
     }
     
     var path: String {
         switch self {
-        case .signUp:
-            return "/signup"
-        case .login:
-            return "/login"
+        case .getCurrentUser:
+            return "/current_user"
         }
     }
     
      var headers: HTTPHeaders {
-        switch self {
-        case .signUp, .login:
-            return ["Content-Type": "application/json"]
-        }
+         guard let token = AuthController.getToken() else {
+             return ["Content-Type": "application/json"]
+         }
+         switch self {
+         case .getCurrentUser:
+             return ["Content-Type": "application/json",
+                     "x-access-token" : "\(token)"]
+         }
     }
     
     struct CustomPatchEncding: ParameterEncoding {
@@ -54,12 +55,12 @@ public enum AuthRequestRouter: AbstractRequestRouter {
         urlRequest.httpMethod = method.rawValue
         urlRequest.headers = headers
         switch self {
-        case .signUp(let parameters),
-             .login(let parameters):
-            urlRequest = try CustomPatchEncding().encode(urlRequest, with: parameters)
+        case .getCurrentUser:
+            urlRequest = try CustomPatchEncding().encode(urlRequest, with: nil)
         }
         print("---- urlRequest: \(urlRequest) ----")
         return urlRequest
     }
 }
+
 

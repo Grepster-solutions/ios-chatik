@@ -15,10 +15,6 @@ enum ScreenType {
 
 class SignUpOrInViewController: UIViewController {
     
-    private enum Calculations {
-        static let backgroundViewHeight: CGFloat = UIScreen.main.bounds.size.height / 5 * 4
-    }
-    
     // MARK: - Properties
     
     private let presenter: SignUpOrInPresenter
@@ -30,9 +26,6 @@ class SignUpOrInViewController: UIViewController {
     
     private(set) lazy var backgroundView: UIView = {
         let view = UIView()
-        view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 40
         return view
     }()
     
@@ -46,49 +39,15 @@ class SignUpOrInViewController: UIViewController {
     
     private(set) lazy var signInLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(named: .darkBlue)
+        label.textColor = .white
         label.text = "SIGN IN"
         label.font = .systemFont(ofSize: 24)
         return label
     }()
     
-    private(set) lazy var signInWelcomeView = SignInWelcome()
-    
-    private(set) lazy var textFieldsView = TextFields()
-    
-    private(set) lazy var confirmSignUpButton: UIButton = {
-        let button = UIButton()
-        button.clipsToBounds = true
-        button.backgroundColor = .white
-        button.setTitle("SIGN UP", for: .normal)
-        button.setTitleColor(UIColor(named: .darkBlue), for: .normal)
-        return button
-    }()
-    
-    private(set) lazy var confirmSignInButton: UIButton = {
-        let button = UIButton()
-        button.clipsToBounds = true
-        button.backgroundColor = .white
-        button.setTitle("SIGN IN", for: .normal)
-        button.setTitleColor(UIColor(named: .darkBlue), for: .normal)
-        button.isHidden = true
-        return button
-    }()
-    
-    private(set) lazy var signUpButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("SIGN UP", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.isHidden = true
-        return button
-    }()
-    
-    private(set) lazy var signInButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("SIGN IN", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private(set) lazy var logoView = LogoView()
+    private(set) lazy var textFieldsView = TextFieldsView()
+    private(set) lazy var mainButtonsView = MainButtonsView()
     
     
     // MARK: - Init
@@ -108,7 +67,6 @@ class SignUpOrInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         switch screenType {
         case .registration:
             navigationItem.titleView = signUpLabel
@@ -124,86 +82,47 @@ class SignUpOrInViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        var confirmSignUpButtonRadius: CGFloat = confirmSignUpButton.frame.size.height / 2
-        var confirmSignInButtonRadius: CGFloat = confirmSignInButton.frame.size.height / 2
-        
         backgroundView.setGradient(colors: [UIColor(named: .purple), UIColor(named: .darkBlue)],
                                    locations: [0.0, 1.0],
                                    startPoint: CGPoint(x: 0, y: 0),
                                    endPoint: CGPoint(x: 1, y: 1))
-        
-        textFieldsView.didLayoutSubviews()
-        
-        confirmSignUpButton.layer.cornerRadius = confirmSignUpButtonRadius
-        confirmSignInButton.layer.cornerRadius = confirmSignInButtonRadius
-        
-        confirmSignUpButton.setShadowWithColor(color: UIColor(named: .shadowPurple),
-                                        opacity: 1,
-                                        offset: CGSize(width: 0, height: 0),
-                                        radius: confirmSignUpButtonRadius,
-                                        viewCornerRadius: confirmSignUpButtonRadius)
-        
-        confirmSignInButton.setShadowWithColor(color: UIColor(named: .shadowPurple),
-                                               opacity: 1,
-                                               offset: CGSize(width: 0, height: 0),
-                                               radius: confirmSignInButtonRadius,
-                                               viewCornerRadius: confirmSignInButtonRadius)
+    }
+    
+    
+    // MARK: - Methods
+    
+    func removeTextInTextFields() {
+        textFieldsView.removeTextInTextField()
     }
     
     
     // MARK: - Private methods
     
     private func addSubviews() {
-        view.addSubview(signInWelcomeView)
         view.addSubview(backgroundView)
-        
-        backgroundView.addSubview(signUpButton)
-        
+        backgroundView.addSubview(logoView)
         backgroundView.addSubview(textFieldsView)
-        
-        backgroundView.addSubview(confirmSignUpButton)
-        backgroundView.addSubview(confirmSignInButton)
-        backgroundView.addSubview(signInButton)
+        backgroundView.addSubview(mainButtonsView)
     }
     
     private func makeConstraints() {
-        signInWelcomeView.snp.makeConstraints { make in
+        backgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        logoView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide)
         }
         
-        backgroundView.snp.makeConstraints { make in
-            make.left.top.right.equalToSuperview()
-            make.height.equalTo(Calculations.backgroundViewHeight)
-        }
-        
-        signUpButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(24)
-        }
-        
         textFieldsView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.left.right.equalToSuperview().inset(54)
+            make.left.right.equalToSuperview().inset(52)
+            make.top.equalTo(logoView.snp.bottom).offset(UIScreen.main.bounds.size.height * 0.05)
         }
         
-        
-        
-        signInButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(20)
-        }
-        
-        confirmSignUpButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(100)
-            make.bottom.equalTo(signInButton.snp.top).offset(-30)
-            make.height.equalTo(40)
-        }
-        
-        confirmSignInButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(100)
-            make.bottom.equalTo(signInButton.snp.top).offset(-30)
-            make.height.equalTo(40)
+        mainButtonsView.snp.makeConstraints { make in
+            make.top.equalTo(textFieldsView.snp.bottom).offset(UIScreen.main.bounds.size.height * 0.1)
+            make.left.right.bottom.equalToSuperview().inset(52)
         }
     }
     
@@ -211,11 +130,10 @@ class SignUpOrInViewController: UIViewController {
         let gesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapBackgroundView))
         backgroundView.addGestureRecognizer(gesture)
         
-        confirmSignUpButton.addTarget(self, action: #selector(didTapConfirmSignUpButton), for: .touchUpInside)
-        
-        signInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
-        
-        signUpButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
+        mainButtonsView.signUpButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
+        mainButtonsView.loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+        mainButtonsView.createButton.addTarget(self, action: #selector(didTapTransitionButton), for: .touchUpInside)
+        mainButtonsView.signInButton.addTarget(self, action: #selector(didTapTransitionButton), for: .touchUpInside)
     }
     
     private func updateTitle(screenType: ScreenType) {
@@ -224,64 +142,6 @@ class SignUpOrInViewController: UIViewController {
             navigationItem.titleView = signUpLabel
         case .login:
             navigationItem.titleView = signInLabel
-        }
-    }
-    
-    private func updateCorenerRadius(screenType: ScreenType) {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0, options: [.curveEaseInOut]) { [weak self] in
-            guard let self = self else { return }
-            switch screenType {
-            case .registration:
-                self.backgroundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-            case .login:
-                self.backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            }
-        }
-    }
-    
-    private func updateTextFields(screenType: ScreenType) {
-        var y = Double()
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       options: [.curveEaseInOut]) { [weak self] in
-            guard let self = self else { return }
-            switch screenType {
-            case .registration:
-                y = UIScreen.main.bounds.height / 5
-                print("zzz1 ", y)
-                self.textFieldsView.stackView.frame.origin = CGPoint(x: 0, y: -y)
-            case .login:
-                y = UIScreen.main.bounds.height / 3.2
-                print("zzz2 ", y)
-                self.textFieldsView.stackView.frame.origin = CGPoint(x: 0, y: -y)
-            }
-        }
-    }
-    
-    private func hideTextFields(screenType: ScreenType) {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0, options: [.curveEaseInOut]) { [weak self] in
-            self?.textFieldsView.hideView(screenType: screenType)
-        }
-    }
-    
-    private func updateSignUpOrInButton(screenType: ScreenType) {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0, options: [.curveEaseInOut]) { [weak self] in
-            guard let self = self else { return }
-            switch screenType {
-            case .registration:
-                self.signUpButton.isHidden = true
-                self.signInButton.isHidden = false
-                self.confirmSignUpButton.isHidden = false
-                self.confirmSignInButton.isHidden = true
-            case .login:
-                self.signUpButton.isHidden = false
-                self.signInButton.isHidden = true
-                self.confirmSignUpButton.isHidden = true
-                self.confirmSignInButton.isHidden = false
-            }
         }
     }
     
@@ -294,9 +154,9 @@ class SignUpOrInViewController: UIViewController {
     }
     
     @objc
-    private func didTapConfirmSignUpButton() {
+    private func didTapSignUpButton() {
         guard let name = textFieldsView.nameTextField.text, !name.isEmpty else {
-            return showToast(title: "Name is Empty!")
+            return showToast(title: "Name is empty!")
         }
         
         guard let email = textFieldsView.emailTextField.text, !email.isEmpty else {
@@ -304,7 +164,7 @@ class SignUpOrInViewController: UIViewController {
         }
         
         guard let password = textFieldsView.passwordTextField.text, !password.isEmpty else {
-            return showToast(title: "Password is Empty!")
+            return showToast(title: "Password is empty!")
         }
         
         presenter.signUp(name: name,
@@ -313,33 +173,31 @@ class SignUpOrInViewController: UIViewController {
     }
     
     @objc
-    private func didTapSignInButton() {
-        let y = UIScreen.main.bounds.height / 4
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       options: [.allowAnimatedContent, .curveEaseInOut]) { [weak self] in
-            guard let self = self else { return }
-            self.screenType = .login
-            self.hideTextFields(screenType: .login)
-            self.updateTextFields(screenType: .login)
-            self.updateSignUpOrInButton(screenType: .login)
-            self.backgroundView.frame.origin = CGPoint(x: 0, y: y)
-            self.updateCorenerRadius(screenType: .login)
+    private func didTapLoginButton() {
+        guard let email = textFieldsView.emailTextField.text, !email.isEmpty else {
+            return showToast(title: "Email is empty!")
         }
+        
+        guard let password = textFieldsView.passwordTextField.text, !password.isEmpty else {
+            return showToast(title: "Password is empty!")
+        }
+        
+        presenter.login(email: email, password: password)
     }
     
     @objc
-    private func didTapSignUpButton() {
-        UIView.animate(withDuration: 0.5,
+    private func didTapTransitionButton() {
+        if screenType == .registration {
+            screenType = .login
+        } else {
+            screenType = .registration
+        }
+        UIView.animate(withDuration: 0.35,
                        delay: 0,
-                       options: [.allowAnimatedContent, .curveEaseInOut]) { [weak self] in
+                       options: [.curveEaseInOut]) { [weak self] in
             guard let self = self else { return }
-            self.screenType = .registration
-            self.hideTextFields(screenType: .registration)
-            self.updateTextFields(screenType: .registration)
-            self.updateSignUpOrInButton(screenType: .registration)
-            self.backgroundView.frame.origin = CGPoint(x: 0, y: 0)
-            self.updateCorenerRadius(screenType: .registration)
+            self.mainButtonsView.updateView(screenType: self.screenType)
+            self.textFieldsView.updateView(screenType: self.screenType)
         }
     }
 }

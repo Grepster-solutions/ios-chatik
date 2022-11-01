@@ -20,9 +20,10 @@ class SignUpOrInPresenter {
         AuthService.signUp(name: name, email: email, password: password) { [weak view] result in
             switch result {
             case .success(let data):
-                view?.showAlert(alertText: "Успех!", alertMessage: "\(data.token)")
-                view?.removeTextInTextFields()
-//                AuthController.login(with: data.token)
+//                view?.removeTextInTextFields()
+                Settings.currentUser = data.user
+                AuthController.login(with: data.token)
+                AppController.shared.openModule(.chatList)
                 print("success in signUp")
             case .failure(let error):
                 view?.showAlert(alertText: "Не вышло:(", alertMessage: "В другой раз получится!")
@@ -35,9 +36,11 @@ class SignUpOrInPresenter {
         AuthService.login(email: email, password: password) { [weak view] result in
             switch result {
             case .success(let data):
-                view?.showAlert(alertText: "Успех!", alertMessage: "\(data.token)")
-                view?.removeTextInTextFields()
-//                AuthController.login(with: data.token)
+//                view?.showAlert(alertText: "Успех!", alertMessage: "\(data.token)")
+//                view?.removeTextInTextFields()
+                Settings.currentUser = data.user
+                AuthController.login(with: data.token)
+                AppController.shared.openModule(.chatList)
                 print("success in login")
             case .failure(let error):
                 view?.showAlert(alertText: "Не вышло:(", alertMessage: "В другой раз получится!")

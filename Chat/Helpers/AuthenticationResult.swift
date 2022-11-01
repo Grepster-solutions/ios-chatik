@@ -9,4 +9,5 @@ import Foundation
 
 struct AuthenticationResult: Codable {
     let token: String
+    let user: User
 }

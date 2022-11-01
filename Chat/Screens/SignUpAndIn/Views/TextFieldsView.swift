@@ -103,7 +103,7 @@ class TextFieldsView: UIView {
     
     // MARK: - Methods
     
-    func updateView(screenType: ScreenType) {
+    func updateView(screenType: AuthScreenType) {
         switch screenType {
         case .registration:
             nameTextField.isHidden = false

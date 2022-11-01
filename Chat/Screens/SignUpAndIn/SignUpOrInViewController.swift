@@ -8,17 +8,12 @@
 import UIKit
 import SnapKit
 
-enum ScreenType {
-    case registration
-    case login
-}
-
 class SignUpOrInViewController: UIViewController {
     
     // MARK: - Properties
     
     private let presenter: SignUpOrInPresenter
-    private var screenType: ScreenType {
+    private var screenType: AuthScreenType {
         didSet {
             updateTitle(screenType: screenType)
         }
@@ -52,7 +47,7 @@ class SignUpOrInViewController: UIViewController {
     
     // MARK: - Init
     
-    init(presenter: SignUpOrInPresenter, screenType: ScreenType) {
+    init(presenter: SignUpOrInPresenter, screenType: AuthScreenType) {
         self.presenter = presenter
         self.screenType = screenType
         super.init(nibName: nil, bundle: nil)
@@ -136,7 +131,7 @@ class SignUpOrInViewController: UIViewController {
         mainButtonsView.signInButton.addTarget(self, action: #selector(didTapTransitionButton), for: .touchUpInside)
     }
     
-    private func updateTitle(screenType: ScreenType) {
+    private func updateTitle(screenType: AuthScreenType) {
         switch screenType {
         case .registration:
             navigationItem.titleView = signUpLabel

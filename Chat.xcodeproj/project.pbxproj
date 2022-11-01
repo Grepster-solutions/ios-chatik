@@ -27,6 +27,7 @@
 		4B90916029103A3200CBA414 /* UserRequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90915F29103A3200CBA414 /* UserRequestRouter.swift */; };
 		4B90916229103B2900CBA414 /* UserRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90916129103B2900CBA414 /* UserRequestFactory.swift */; };
 		4B90916429103BA700CBA414 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90916329103BA700CBA414 /* UserService.swift */; };
+		4B90916629117AA900CBA414 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90916529117AA900CBA414 /* AppController.swift */; };
 		4BAA436C290C3D5700A2C85A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAA436B290C3D5700A2C85A /* UIView+Extensions.swift */; };
 		4BAA436E290C410B00A2C85A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAA436D290C410B00A2C85A /* UIColor+Extensions.swift */; };
 		4BAA4370290C492100A2C85A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAA436F290C492100A2C85A /* UITextField+Extensions.swift */; };
@@ -71,6 +72,7 @@
 		4B90915F29103A3200CBA414 /* UserRequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestRouter.swift; sourceTree = "<group>"; };
 		4B90916129103B2900CBA414 /* UserRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestFactory.swift; sourceTree = "<group>"; };
 		4B90916329103BA700CBA414 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		4B90916529117AA900CBA414 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		4BAA436B290C3D5700A2C85A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		4BAA436D290C410B00A2C85A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		4BAA436F290C492100A2C85A /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		4B6FE47A2909288C00C471EE /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				4B90916729117AB200CBA414 /* Controllers */,
 				4B6FE49529092D1F00C471EE /* Helpers */,
 				4B6FE48F29092C4300C471EE /* Network */,
 				4B6FE4AC29093E9200C471EE /* Screens */,
@@ -187,7 +190,6 @@
 				4B6FE4A729093E0D00C471EE /* Extensions */,
 				4B6FE49629092D2C00C471EE /* Constants.swift */,
 				4B6FE49E29092F9800C471EE /* NetworkError.swift */,
-				4BAA43872910360400A2C85A /* AuthController.swift */,
 				4BAA43892910369F00A2C85A /* Settings.swift */,
 				4BAA438B2910383F00A2C85A /* KeychainPasswordItem.swift */,
 			);
@@ -224,6 +226,15 @@
 				4B6FE4AF2909436D00C471EE /* SignUpOrInPresenter.swift */,
 			);
 			path = SignUpAndIn;
+			sourceTree = "<group>";
+		};
+		4B90916729117AB200CBA414 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4BAA43872910360400A2C85A /* AuthController.swift */,
+				4B90916529117AA900CBA414 /* AppController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4BAA4376290C65DE00A2C85A /* Views */ = {
@@ -438,6 +449,7 @@
 				4B6FE4A929093E1D00C471EE /* UITableViewCell+Extensions.swift in Sources */,
 				4B90916429103BA700CBA414 /* UserService.swift in Sources */,
 				59592E49290EE62600A13B6A /* LastMessage.swift in Sources */,
+				4B90916629117AA900CBA414 /* AppController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

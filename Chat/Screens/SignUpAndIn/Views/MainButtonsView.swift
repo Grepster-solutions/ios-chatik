@@ -42,7 +42,7 @@ class MainButtonsView: UIView {
     private(set) lazy var createButton: UIButton = {
         let button = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = .white.withAlphaComponent(0.9)
+        button.backgroundColor = .white.withAlphaComponent(0.7)
         button.setTitle("Create", for: .normal)
         button.setTitleColor(UIColor(named: .darkBlue), for: .normal)
         return button
@@ -51,7 +51,7 @@ class MainButtonsView: UIView {
     private(set) lazy var signInButton: UIButton = {
         let button = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = .white.withAlphaComponent(0.9)
+        button.backgroundColor = .white.withAlphaComponent(0.7)
         button.setTitle("Sign In", for: .normal)
         button.setTitleColor(UIColor(named: .darkBlue), for: .normal)
         return button
@@ -84,25 +84,25 @@ class MainButtonsView: UIView {
         createButton.layer.cornerRadius = createButtonRadius
         signInButton.layer.cornerRadius = signInButtonRadius
         
-        loginButton.setShadowWithColor(color: UIColor(named: .shadowPurple),
+        loginButton.setShadowWithColor(color: UIColor(named: .shadowСolor),
                                             opacity: 1,
                                             offset: CGSize(width: 0, height: 0),
                                             radius: loginButtonRadius,
                                             viewCornerRadius: loginButtonRadius)
         
-        signUpButton.setShadowWithColor(color: UIColor(named: .shadowPurple),
+        signUpButton.setShadowWithColor(color: UIColor(named: .shadowСolor),
                                             opacity: 1,
                                             offset: CGSize(width: 0, height: 0),
                                             radius: signUpButtonRadius,
                                             viewCornerRadius: signUpButtonRadius)
         
-        createButton.setShadowWithColor(color: UIColor(named: .shadowPurple),
+        createButton.setShadowWithColor(color: UIColor(named: .shadowСolor),
                                             opacity: 1,
                                             offset: CGSize(width: 0, height: 0),
                                             radius: createButtonRadius,
                                             viewCornerRadius: createButtonRadius)
         
-        signInButton.setShadowWithColor(color: UIColor(named: .shadowPurple),
+        signInButton.setShadowWithColor(color: UIColor(named: .shadowСolor),
                                             opacity: 1,
                                             offset: CGSize(width: 0, height: 0),
                                             radius: signInButtonRadius,
@@ -112,7 +112,7 @@ class MainButtonsView: UIView {
     
     // MARK: - Methods
     
-    func updateView(screenType: ScreenType) {
+    func updateView(screenType: AuthScreenType) {
         switch screenType {
         case .registration:
             loginButton.isHidden = true

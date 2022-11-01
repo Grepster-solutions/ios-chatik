@@ -10,7 +10,7 @@ import UIKit
 public enum ColorName: String {
     case purple = "#9046DA"
     case darkBlue = "#240895"
-    case shadowPurple = "#4E2E6E"
+    case shadowСolor = "#1D0387"
 }
 
 extension UIColor {

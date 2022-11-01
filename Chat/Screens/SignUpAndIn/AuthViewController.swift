@@ -1,5 +1,5 @@
 //
-//  SignUpOrInViewController.swift
+//  AuthViewController.swift
 //  Chat
 //
 //  Created by Дарья on 26.10.2022.
@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class SignUpOrInViewController: UIViewController {
+class AuthViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let presenter: SignUpOrInPresenter
+    private let presenter: AuthPresenter
     private var screenType: AuthScreenType {
         didSet {
             updateTitle(screenType: screenType)
@@ -47,7 +47,7 @@ class SignUpOrInViewController: UIViewController {
     
     // MARK: - Init
     
-    init(presenter: SignUpOrInPresenter, screenType: AuthScreenType) {
+    init(presenter: AuthPresenter, screenType: AuthScreenType) {
         self.presenter = presenter
         self.screenType = screenType
         super.init(nibName: nil, bundle: nil)
@@ -62,6 +62,13 @@ class SignUpOrInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: .didLogout,
+                                               object: nil,
+                                               queue: .main) { [weak self] _ in
+            self?.screenType = .registration
+        }
+        
         switch screenType {
         case .registration:
             navigationItem.titleView = signUpLabel

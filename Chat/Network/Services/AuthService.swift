@@ -47,5 +47,11 @@ class AuthService {
             completion(result)
         }
     }
+    
+    static func logout(completion: @escaping (Result<Bool, Error>) -> Void) {
+        sendRequest(requestOptions: .logout) { result in
+            completion(result)
+        }
+    }
 }
 

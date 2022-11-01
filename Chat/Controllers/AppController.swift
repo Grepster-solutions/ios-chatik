@@ -36,13 +36,13 @@ final class AppController {
     func openModule(_ type: ScreenType) {
         switch type {
         case .auth(.registration):
-            let presenter = SignUpOrInPresenter()
-            let vc = SignUpOrInViewController(presenter: presenter, screenType: .registration)
+            let presenter = AuthPresenter()
+            let vc = AuthViewController(presenter: presenter, screenType: .registration)
             presenter.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
         case .auth(.login):
-            let presenter = SignUpOrInPresenter()
-            let vc = SignUpOrInViewController(presenter: presenter, screenType: .login)
+            let presenter = AuthPresenter()
+            let vc = AuthViewController(presenter: presenter, screenType: .login)
             presenter.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
         case .chatList:

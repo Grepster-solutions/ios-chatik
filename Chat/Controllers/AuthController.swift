@@ -39,27 +39,27 @@ public final class AuthController {
         }
     }
     
-    public class func signOut() {
-//        AuthService.logout { result in
-//            switch result {
-//            case .success:
-//                guard ((try? localSignOut()) != nil) else {
-//                    print("local logout failure")
-//                    return
-//                }
-//
-//                print("logout success")
-//            case .failure(let error):
-//                print("logout failure with error: ", error.localizedDescription)
-//            }
-//        }
+    public class func logout() {
+        AuthService.logout { result in
+            switch result {
+            case .success:
+                guard ((try? localLogout()) != nil) else {
+                    print("local logout failure")
+                    return
+                }
+                
+                print("logout success")
+            case .failure(let error):
+                print("error in logout: ", error.localizedDescription)
+            }
+        }
     }
     
-    public class func localSignOut() throws {
-//        guard let currentUser = Settings.currentUser else { return }
-//        try KeychainPasswordItem(service: serviceTokenName,
-//                                 account: currentUser.email).deleteItem()
-//        NotificationCenter.default.post(name: .didLogout, object: nil)
+    public class func localLogout() throws {
+        guard let currentUser = Settings.currentUser else { return }
+        try KeychainPasswordItem(service: serviceTokenName,
+                                 account: currentUser.email).deleteItem()
+        NotificationCenter.default.post(name: .didLogout, object: nil)
     }
 }
 

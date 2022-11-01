@@ -13,7 +13,6 @@ enum ChatService {
         guard let url = URL(string: Constants.baseUrl + "/chat_list"), let token = AuthController.getToken() else {
             return
         }
-        print("zzz ", token)
         let headers = ["Content-Type": "application/json",
                        "x-access-token": "\(token)"]
         

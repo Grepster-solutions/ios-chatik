@@ -7,11 +7,11 @@
 
 import UIKit
 
-public final class AuthController {
-    static let serviceTokenName = "TokenService"
+final class AuthController {
+    private static let serviceTokenName = "TokenService"
     
-    public class func getToken() -> String? {
-        guard let currentUser = Settings.currentUser else {
+    class func getToken() -> String? {
+        guard let currentUser = UserDefaultsManager.currentUser else {
             print("Не удалось получить токен. Нет юзера от приложения.")
             return nil
         }
@@ -25,8 +25,8 @@ public final class AuthController {
         }
     }
     
-    public class func login(with token: String) {
-        guard let currentUser = Settings.currentUser else {
+    class func login(with token: String) {
+        guard let currentUser = UserDefaultsManager.currentUser else {
             print("Не удалось сохранить токен. Нет юзера от приложения.")
             return
         }
@@ -39,7 +39,7 @@ public final class AuthController {
         }
     }
     
-    public class func logout() {
+    class func logout() {
         AuthService.logout { result in
             switch result {
             case .success:
@@ -55,8 +55,8 @@ public final class AuthController {
         }
     }
     
-    public class func localLogout() throws {
-        guard let currentUser = Settings.currentUser else { return }
+    private class func localLogout() throws {
+        guard let currentUser = UserDefaultsManager.currentUser else { return }
         try KeychainPasswordItem(service: serviceTokenName,
                                  account: currentUser.email).deleteItem()
         NotificationCenter.default.post(name: .didLogout, object: nil)

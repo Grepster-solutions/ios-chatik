@@ -49,7 +49,7 @@ class AuthPresenter {
     
     private func resultSuccess(_ data: AuthenticationResult) {
         view?.removeTextInTextFields()
-        Settings.currentUser = data.user
+        UserDefaultsManager.currentUser = data.user
         AuthController.login(with: data.token)
         AppController.shared.openModule(.chatList)
     }

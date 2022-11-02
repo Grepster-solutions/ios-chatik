@@ -21,11 +21,12 @@ final class AppController {
     
     static let shared = AppController()
     
-    var window: UIWindow? {
+    private var window: UIWindow? {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         return windowScene?.windows.first
     }
-    var rootViewController: UIViewController? {
+    
+    private var rootViewController: UIViewController? {
         didSet {
             if let vc = rootViewController {
                 window?.rootViewController = vc

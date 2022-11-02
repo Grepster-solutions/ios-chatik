@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class Settings {
+final class UserDefaultsManager {
     
     private enum Keys: String {
         case user = "current_user"

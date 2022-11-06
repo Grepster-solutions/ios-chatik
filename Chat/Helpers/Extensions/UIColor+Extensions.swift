@@ -11,6 +11,7 @@ public enum ColorName: String {
     case purple = "#9046DA"
     case darkBlue = "#240895"
     case shadowСolor = "#1D0387"
+    case lightBlue = "#EBF9FF"
 }
 
 extension UIColor {

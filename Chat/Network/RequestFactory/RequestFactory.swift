@@ -12,6 +12,7 @@ final class RequestFactory {
 
     private var authFactory: AuthRequestFactory?
     private var userFactory: UserRequestFactory?
+    private var messagesFactory: MessagesRequestFactory?
     
     lazy private var sessionManager: Session = {
         return SessionManagerFactory.sessionManager
@@ -33,6 +34,16 @@ final class RequestFactory {
         } else {
             let factory = UserRequestFactory(sessionManager: sessionManager)
             userFactory = factory
+            return factory
+        }
+    }
+    
+    func makeMessagesFactory() -> MessagesRequestFactory {
+        if let factory = messagesFactory {
+            return factory
+        } else {
+            let factory = MessagesRequestFactory(sessionManager: sessionManager)
+            messagesFactory = factory
             return factory
         }
     }

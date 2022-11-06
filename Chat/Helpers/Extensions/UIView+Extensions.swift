@@ -10,14 +10,17 @@ import UIKit
 extension UIView {
     
     /// Установка градиента для любого UIView
-    func setGradient(colors: [UIColor], locations: [NSNumber], startPoint: CGPoint, endPoint: CGPoint) {
+    func makeGradient(colors: [UIColor],
+                      locations: [NSNumber],
+                      startPoint: CGPoint,
+                      endPoint: CGPoint) -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = bounds
         gradientLayer.colors = colors.map { $0.cgColor }
         gradientLayer.locations = locations
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
         layer.insertSublayer(gradientLayer, at: 0)
+        return gradientLayer
     }
     
     /// Установка тени для любого UIView

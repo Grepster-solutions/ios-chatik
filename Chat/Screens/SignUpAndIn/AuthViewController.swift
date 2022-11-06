@@ -24,6 +24,8 @@ class AuthViewController: UIViewController {
         return view
     }()
     
+    private weak var gradientLayer: CAGradientLayer?
+    
     private(set) lazy var signUpLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -63,6 +65,10 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if AuthController.getToken() != nil {
+            AppController.shared.openModule(.chatList)
+        }
+        
         NotificationCenter.default.addObserver(forName: .didLogout,
                                                object: nil,
                                                queue: .main) { [weak self] _ in
@@ -84,10 +90,11 @@ class AuthViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        backgroundView.setGradient(colors: [UIColor(named: .purple), UIColor(named: .darkBlue)],
-                                   locations: [0.0, 1.0],
-                                   startPoint: CGPoint(x: 0, y: 0),
-                                   endPoint: CGPoint(x: 1, y: 1))
+        gradientLayer?.frame = view.bounds
+        gradientLayer = backgroundView.makeGradient(colors: [UIColor(named: .purple), UIColor(named: .darkBlue)],
+                                                 locations: [0.0, 1.0],
+                                                 startPoint: CGPoint(x: 0, y: 0),
+                                                 endPoint: CGPoint(x: 1, y: 1))
     }
     
     

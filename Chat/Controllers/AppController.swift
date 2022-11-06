@@ -47,7 +47,9 @@ final class AppController {
             presenter.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
         case .chatList:
-            let vc = ChatViewController()
+            let presenter = ChatPresenter()
+            let vc = ChatViewController(presenter: presenter)
+            presenter.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
         }
     }

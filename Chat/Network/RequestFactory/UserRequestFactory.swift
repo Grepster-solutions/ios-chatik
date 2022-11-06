@@ -1,14 +1,14 @@
 //
-//  AuthRequestFactory.swift
+//  UserRequestFactory.swift
 //  Chat
 //
-//  Created by Дарья on 26.10.2022.
+//  Created by Дарья on 31.10.2022.
 //
 
 import UIKit
 import Alamofire
 
-final class AuthRequestFactory: AbstractRequestFactory {
+final class UserRequestFactory: AbstractRequestFactory {
     var sessionManager: Session
     var queue: DispatchQueue
     
@@ -19,7 +19,7 @@ final class AuthRequestFactory: AbstractRequestFactory {
     
     public func sendRequest<T>(
         modelType: T.Type,
-        requestOptions: AuthRequestRouter,
+        requestOptions: UserRequestRouter,
         completion: @escaping (Result<T, Error>) -> Void) where T : Codable {
         self.request(requestOptions).responseJSON { (response) in
             print("---- response: \(response) ----")
@@ -68,7 +68,7 @@ final class AuthRequestFactory: AbstractRequestFactory {
     }
     
     public func sendRequest(
-        requestOptions: AuthRequestRouter,
+        requestOptions: UserRequestRouter,
         completion: @escaping (Result<Bool, Error>) -> Void) {
         self.request(requestOptions).responseJSON { (response) in
             guard let statusCode = response.response?.statusCode else {
@@ -100,4 +100,5 @@ final class AuthRequestFactory: AbstractRequestFactory {
         }
     }
 }
+
 

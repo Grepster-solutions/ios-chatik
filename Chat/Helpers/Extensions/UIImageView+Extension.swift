@@ -9,7 +9,7 @@ import UIKit
 
 extension UIImageView {
     func setImage(from path: String?) {
-        guard let path = path else { return }
+//        guard let path = path else { return }
         
 //        NetworkService.loadImage(fromPath: path) { [weak self] result in
 //            guard let self = self else { return }

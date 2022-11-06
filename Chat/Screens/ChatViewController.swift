@@ -28,8 +28,6 @@ class ChatViewController: UIViewController {
         }
     }
     
-    
-    
     private func setupLayout() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +39,7 @@ class ChatViewController: UIViewController {
         ])
     }
 }
+
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count
@@ -51,7 +50,10 @@ extension ChatViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let chat = chatList[indexPath.row]
-        cell.setup(message: chat.lastMessage?.message, time: nil, name: chat.companions.first?.name ?? "", logoUrl: chat.chatLogo)
+        cell.setup(message: chat.lastMessage?.message,
+                   time: nil,
+                   name: chat.companions.first?.name ?? "",
+                   logoUrl: chat.chatLogo)
         return cell
     }
         

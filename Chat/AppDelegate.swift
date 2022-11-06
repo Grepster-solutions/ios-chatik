@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func makeRootView() -> UIViewController {
-        let presenter = SignUpPresenter()
-        let view = SignUpViewController(presenter: presenter)
+        let presenter = AuthPresenter()
+        let view = AuthViewController(presenter: presenter, screenType: .registration)
         presenter.view = view
         return view
     }

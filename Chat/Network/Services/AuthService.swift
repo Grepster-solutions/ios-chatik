@@ -31,11 +31,25 @@ class AuthService {
         })
     }
     
-    static func signUp(name: String, email: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+    static func signUp(name: String, email: String, password: String, completion: @escaping (Result<AuthenticationResult, Error>) -> Void) {
         let parameters: [String: Any] = ["name" : name,
                                          "email" : email,
                                          "password" : password]
-        sendRequest(requestOptions: .signUp(parameters: parameters)) { result in
+        sendRequest(modelType: AuthenticationResult.self, requestOptions: .signUp(parameters: parameters)) { result in
+            completion(result)
+        }
+    }
+    
+    static func login(email: String, password: String, completion: @escaping (Result<AuthenticationResult, Error>) -> Void) {
+        let parameters: [String: Any] = ["email" : email,
+                                         "password" : password]
+        sendRequest(modelType: AuthenticationResult.self, requestOptions: .login(parameters: parameters)) { result in
+            completion(result)
+        }
+    }
+    
+    static func logout(completion: @escaping (Result<Bool, Error>) -> Void) {
+        sendRequest(requestOptions: .logout) { result in
             completion(result)
         }
     }

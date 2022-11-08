@@ -38,6 +38,9 @@
 		4B713E2D2918398700437D79 /* CompanionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B713E2C2918398700437D79 /* CompanionsViewController.swift */; };
 		4B713E2F2918399500437D79 /* CompanionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B713E2E2918399500437D79 /* CompanionsPresenter.swift */; };
 		4B713E3229183B8600437D79 /* CompanionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B713E3129183B8600437D79 /* CompanionsCell.swift */; };
+		4B713E35291870AD00437D79 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B713E34291870AD00437D79 /* MainViewController.swift */; };
+		4B713E39291872CC00437D79 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B713E38291872CC00437D79 /* ProfileViewController.swift */; };
+		4B713E3B2918730300437D79 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B713E3A2918730300437D79 /* SettingsViewController.swift */; };
 		4B90916029103A3200CBA414 /* UserRequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90915F29103A3200CBA414 /* UserRequestRouter.swift */; };
 		4B90916229103B2900CBA414 /* UserRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90916129103B2900CBA414 /* UserRequestFactory.swift */; };
 		4B90916429103BA700CBA414 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90916329103BA700CBA414 /* UserService.swift */; };
@@ -98,6 +101,9 @@
 		4B713E2C2918398700437D79 /* CompanionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionsViewController.swift; sourceTree = "<group>"; };
 		4B713E2E2918399500437D79 /* CompanionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionsPresenter.swift; sourceTree = "<group>"; };
 		4B713E3129183B8600437D79 /* CompanionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionsCell.swift; sourceTree = "<group>"; };
+		4B713E34291870AD00437D79 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4B713E38291872CC00437D79 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4B713E3A2918730300437D79 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4B90915F29103A3200CBA414 /* UserRequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestRouter.swift; sourceTree = "<group>"; };
 		4B90916129103B2900CBA414 /* UserRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestFactory.swift; sourceTree = "<group>"; };
 		4B90916329103BA700CBA414 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -246,6 +252,9 @@
 		4B6FE4AC29093E9200C471EE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4B713E37291872BC00437D79 /* Settings */,
+				4B713E36291872B400437D79 /* Profile */,
+				4B713E33291870A000437D79 /* Main */,
 				4B713E2B2918396C00437D79 /* Companions */,
 				4B713E112912A50000437D79 /* MessageList */,
 				59E85357290D9AF800DF86C5 /* ChatList */,
@@ -300,6 +309,30 @@
 				4B713E3129183B8600437D79 /* CompanionsCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		4B713E33291870A000437D79 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4B713E34291870AD00437D79 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4B713E36291872B400437D79 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4B713E38291872CC00437D79 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4B713E37291872BC00437D79 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4B713E3A2918730300437D79 /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		4B90916729117AB200CBA414 /* Controllers */ = {
@@ -498,6 +531,8 @@
 				4B6FE4AB29093E4300C471EE /* UIImageView+Extension.swift in Sources */,
 				4BAA438C2910383F00A2C85A /* KeychainPasswordItem.swift in Sources */,
 				4BAA438A2910369F00A2C85A /* Settings.swift in Sources */,
+				4B713E39291872CC00437D79 /* ProfileViewController.swift in Sources */,
+				4B713E35291870AD00437D79 /* MainViewController.swift in Sources */,
 				4BAA4386291032F200A2C85A /* AuthenticationResult.swift in Sources */,
 				4B6FE4B2290950F600C471EE /* UIViewController+Extension.swift in Sources */,
 				4B713E3229183B8600437D79 /* CompanionsCell.swift in Sources */,
@@ -506,6 +541,7 @@
 				4B6FE4B02909436D00C471EE /* AuthPresenter.swift in Sources */,
 				4B90916229103B2900CBA414 /* UserRequestFactory.swift in Sources */,
 				4B713E24291467E500437D79 /* MessagesRequestRouter.swift in Sources */,
+				4B713E3B2918730300437D79 /* SettingsViewController.swift in Sources */,
 				4B6FE49429092CA500C471EE /* AbstractRequestRouter.swift in Sources */,
 				4BAA436C290C3D5700A2C85A /* UIView+Extensions.swift in Sources */,
 				4B6FE49929092D8200C471EE /* AuthRequestRouter.swift in Sources */,

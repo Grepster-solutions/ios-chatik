@@ -9,7 +9,7 @@ import UIKit
 
 enum ScreenType {
     case auth(AuthScreenType)
-    case chatList
+    case main
 }
 
 enum AuthScreenType {
@@ -46,10 +46,8 @@ final class AppController {
             let vc = AuthViewController(presenter: presenter, screenType: .login)
             presenter.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
-        case .chatList:
-            let presenter = ChatPresenter()
-            let vc = ChatViewController(presenter: presenter)
-            presenter.view = vc
+        case .main:
+            let vc = MainViewController()
             rootViewController = UINavigationController(rootViewController: vc)
         }
     }

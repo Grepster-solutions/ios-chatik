@@ -51,7 +51,7 @@ class AuthPresenter {
         view?.removeTextInTextFields()
         UserDefaultsManager.currentUser = data.user
         AuthController.login(with: data.token)
-        AppController.shared.openModule(.chatList)
+        AppController.shared.openModule(.main)
     }
 }
 

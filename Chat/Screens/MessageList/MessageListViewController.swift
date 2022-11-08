@@ -101,11 +101,11 @@ class MessageListViewController: UIViewController {
 
 extension MessageListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.mockMessageList.massage.count
+        return presenter.messageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageType = presenter.mockMessageList.massage[indexPath.row].messateType
+        let messageType = presenter.messageList[indexPath.row].type
         switch messageType {
         case "incoming":
             self.messageType = .incoming

@@ -53,7 +53,7 @@ class ChatViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "Все чаты"
         let newChatButton = UIBarButtonItem(title: "+",
-                                            style: .plain,
+                                            style: .done,
                                             target: self,
                                             action: #selector(didTapNewChatButton))
         newChatButton.tintColor = UIColor(named: .darkBlue)

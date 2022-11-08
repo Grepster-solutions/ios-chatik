@@ -66,7 +66,7 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         
         if AuthController.getToken() != nil {
-            AppController.shared.openModule(.chatList)
+            AppController.shared.openModule(.main)
         }
         
         NotificationCenter.default.addObserver(forName: .didLogout,

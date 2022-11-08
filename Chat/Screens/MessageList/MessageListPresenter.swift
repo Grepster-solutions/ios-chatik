@@ -12,18 +12,18 @@ class MessageListPresenter {
     // MARK: - Properties
     
     weak var view: MessageListViewController?
-    let mockMessageList = MessageList.mock
+    let messageList = [Message]()
     
     
     // MARK: - Methods
     
     func configure(cell: IncomingMessageCell, indexPath: IndexPath) {
-        let messageModel = mockMessageList.massage[indexPath.row]
+        let messageModel = messageList[indexPath.row]
         cell.display(model: messageModel)
     }
     
     func configure(cell: OutcomingMessageCell, indexPath: IndexPath) {
-        let messageModel = mockMessageList.massage[indexPath.row]
+        let messageModel = messageList[indexPath.row]
         cell.display(model: messageModel)
     }
 }

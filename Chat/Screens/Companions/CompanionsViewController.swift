@@ -60,14 +60,6 @@ class CompanionsViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-    
-    
-    // MARK: - Actions
-    
-    @objc
-    private func didTapNewChatButton() {
-        print("zzz 1")
-    }
 }
 
 
@@ -75,7 +67,8 @@ class CompanionsViewController: UIViewController {
 
 extension CompanionsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.companions?.companions.count ?? 0
+//        return presenter.companions?.companions.count ?? 0
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,5 +78,7 @@ extension CompanionsViewController: UITableViewDataSource, UITableViewDelegate {
         presenter.configure(cell: cell, indexPath: indexPath)
         return cell
     }
+    
+    didSe
 }
 

@@ -32,9 +32,10 @@ class AuthService {
     }
     
     static func signUp(name: String, email: String, password: String, completion: @escaping (Result<AuthenticationResult, Error>) -> Void) {
-        let parameters: [String: Any] = ["name" : name,
-                                         "email" : email,
-                                         "password" : password]
+        let parameters: [String: Any] = ["name": name,
+                                         "email": email,
+                                         "password": password,
+                                         "isDebug": true]
         sendRequest(modelType: AuthenticationResult.self, requestOptions: .signUp(parameters: parameters)) { result in
             completion(result)
         }

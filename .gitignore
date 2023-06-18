@@ -5,3 +5,5 @@ xcuserdata/
 xcschememanagement.plist
 Pods/
 *.xcbkptlist
+*.xcworkspace
+Podfile.lock

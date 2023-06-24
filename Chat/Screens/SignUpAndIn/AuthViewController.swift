@@ -13,11 +13,7 @@ class AuthViewController: UIViewController {
     // MARK: - Properties
     
     private let presenter: AuthPresenter
-    private var screenType: AuthScreenType {
-        didSet {
-            updateTitle(screenType: screenType)
-        }
-    }
+    private var screenType: AuthScreenType
     
     private(set) lazy var backgroundView: UIView = {
         let view = UIView()
@@ -69,12 +65,9 @@ class AuthViewController: UIViewController {
             self?.screenType = .registration
         }
         
-        switch screenType {
-        case .registration:
-            navigationItem.titleView = signUpLabel
-        case .login:
-            navigationItem.titleView = signInLabel
-        }
+        updateTitle(screenType: screenType)
+        textFieldsView.updateView(screenType: screenType)
+        mainButtonsView.updateView(screenType: screenType)
         
         addSubviews()
         makeConstraints()

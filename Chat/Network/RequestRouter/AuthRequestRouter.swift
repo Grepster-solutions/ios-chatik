@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Alamofire
 
-public enum AuthRequestRouter: AbstractRequestRouter {
-    case signUp(parameters: Parameters)
-    case login(parameters: Parameters)
+enum AuthRequestRouter: AbstractRequestRouter {
+    case signUp(name: String, email: String, password: String)
+    case login(email: String, password: String)
     case logout
     
     var method: HTTPMethod {
@@ -34,45 +33,32 @@ public enum AuthRequestRouter: AbstractRequestRouter {
     }
     
      var headers: HTTPHeaders {
-         guard let token = AuthController.getToken() else {
-             return ["Content-Type": "application/json"]
-         }
          switch self {
          case .signUp, .login:
              return ["Content-Type": "application/json"]
          case .logout:
+             guard let token = AuthController.getToken() else {
+                 return [:]
+             }
              return ["Content-Type": "application/json",
                      "x-access-token": "\(token)"]
          }
     }
     
-    struct CustomPatchEncding: ParameterEncoding {
-        func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
-            let mutableRequest = try? URLEncoding().encode(urlRequest, with: parameters) as? NSMutableURLRequest
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: parameters!, options: .prettyPrinted)
-                mutableRequest?.httpBody = jsonData
-                
-            } catch {
-                debugPrint(error.localizedDescription)
-            }
-            return mutableRequest! as URLRequest
+    var parameters: HTTPParameters? {
+        switch self {
+        case .signUp(let name, let email, let password):
+            return ["name": name,
+                    "email": email,
+                    "password": password,
+                    "isDebug": true]
+        case .login(let email, let password):
+            return ["email" : email,
+                    "password" : password]
+        case .logout:
+            return nil
         }
     }
     
-    public func asURLRequest() throws -> URLRequest {
-        var urlRequest = URLRequest(url: fullUrl)
-        urlRequest.httpMethod = method.rawValue
-        urlRequest.headers = headers
-        switch self {
-        case .signUp(let parameters),
-             .login(let parameters):
-            urlRequest = try CustomPatchEncding().encode(urlRequest, with: parameters)
-        case .logout:
-            urlRequest = try CustomPatchEncding().encode(urlRequest, with: nil)
-        }
-        print("---- urlRequest: \(urlRequest) ----")
-        return urlRequest
-    }
 }
 

@@ -17,7 +17,11 @@ class AuthPresenter {
     // MARK: - Methods
     
     func signUp(name: String, email: String, password: String) {
-        AuthService.signUp(name: name, email: email, password: password) { [weak self, weak view] result in
+        let requestRouter = AuthRequestRouter.signUp(name: name,
+                                                     email: email,
+                                                     password: password)
+        NetworkService.makeRequest(requestRouter: requestRouter,
+                                   modelType: AuthenticationResult.self) { [weak self, weak view] result in
             guard let self = self, let view = view else { return }
             switch result {
             case .success(let data):
@@ -31,7 +35,9 @@ class AuthPresenter {
     }
     
     func login(email: String, password: String) {
-        AuthService.login(email: email, password: password) { [weak self, weak view] result in
+        let requestRouter = AuthRequestRouter.login(email: email, password: password)
+        NetworkService.makeRequest(requestRouter: requestRouter,
+                                   modelType: AuthenticationResult.self) { [weak self, weak view] result in
             guard let self = self, let view = view else { return }
             switch result {
             case .success(let data):
@@ -51,7 +57,7 @@ class AuthPresenter {
         view?.removeTextInTextFields()
         UserDefaultsManager.currentUser = data.user
         AuthController.login(with: data.token)
-        AppController.shared.openModule(.chatList)
+        AppController.openModule(.chatList)
     }
 }
 

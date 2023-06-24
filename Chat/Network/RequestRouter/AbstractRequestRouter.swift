@@ -6,39 +6,27 @@
 //
 
 import UIKit
-import Alamofire
 
-protocol AbstractRequestRouter: URLRequestConvertible {
-    var baseUrl: URL { get }
-    var fullUrl: URL { get }
+enum HTTPMethod: String {
+    case connect = "CONNECT"
+    case delete = "DELETE"
+    case get = "GET"
+    case head = "HEAD"
+    case options = "OPTIONS"
+    case patch = "PATCH"
+    case post = "POST"
+    case put = "PUT"
+    case query = "QUERY"
+    case trace = "TRACE"
+}
+
+typealias HTTPHeaders = [String: String]
+typealias HTTPParameters = [String: Any]
+
+protocol AbstractRequestRouter {
     var path: String { get }
     var headers: HTTPHeaders { get }
     var method: HTTPMethod { get }
-}
-
-extension AbstractRequestRouter {
-    
-    var baseUrl: URL {
-        let url = Constants.baseUrl
-        return URL.init(string: url)!
-    }
-    
-    var fullUrl: URL {
-        return baseUrl.appendingPathComponent(path)
-    }
-    
-    var headers: HTTPHeaders {
-        return ["Content-Type": "application/json"]
-    }
-    
-    func getFullUrl(with query: [URLQueryItem]) -> URL {
-        var appUrl = baseUrl.absoluteString
-        appUrl.append(path)
-        var components = URLComponents(string: appUrl)
-        components?.queryItems = query
-        
-        guard let url = components?.url else { return fullUrl }
-        return url
-    }
+    var parameters: HTTPParameters? { get }
 }
 

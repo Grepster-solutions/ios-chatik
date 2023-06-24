@@ -20,6 +20,8 @@ public enum NetworkError {
     case sessionTimedOut
     // Ошибка от сервера, когда пользователю не хватает места в хранилище
     case runOfSpace
+    // Токен не валиден.
+    case invalidToken
 }
 
 // MARK: - LocalizedError
@@ -38,6 +40,8 @@ extension NetworkError: LocalizedError {
             return "Закончилось место"
         case .sessionTimedOut:
             return "Ваша сессия истекла"
+        case .invalidToken:
+            return "Ошибка авторизации"
         }
     }
     
@@ -55,22 +59,16 @@ extension NetworkError: LocalizedError {
             return "Пожалуйста, освободите место в памяти телефона"
         case .sessionTimedOut:
             return "Не удалось получить новые аутентификационные данные"
+        case .invalidToken:
+            return "Нужно войти в приложение заново"
         }
     }
     
     var errorMessage: String? {
         switch self {
-        case .serverError:
-            return ""
-        case .responseError:
-            return ""
-        case .internetError:
-            return ""
         case .userAlreadyExists:
             return "User already exists"
-        case .runOfSpace:
-            return ""
-        case .sessionTimedOut:
+        default:
             return ""
         }
     }

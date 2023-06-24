@@ -40,7 +40,9 @@ final class AuthController {
     }
     
     class func logout() {
-        AuthService.logout { result in
+        let requestRouter = AuthRequestRouter.logout
+        NetworkService.makeRequest(requestRouter: requestRouter,
+                                   modelType: Bool.self) { result in
             switch result {
             case .success:
                 guard ((try? localLogout()) != nil) else {

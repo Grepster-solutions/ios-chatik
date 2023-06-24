@@ -29,6 +29,7 @@ class TextFieldsView: UIView {
         textField.textColor = .white
         textField.textContentType = .name
         textField.returnKeyType = .continue
+        textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         return textField
     }()
@@ -43,6 +44,7 @@ class TextFieldsView: UIView {
         textField.textContentType = .emailAddress
         textField.returnKeyType = .continue
         textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -56,6 +58,7 @@ class TextFieldsView: UIView {
         textField.textContentType = .newPassword
         textField.returnKeyType = .continue
         textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -68,6 +71,7 @@ class TextFieldsView: UIView {
         textField.textColor = .white
         textField.textContentType = .newPassword
         textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         return textField
     }()
     

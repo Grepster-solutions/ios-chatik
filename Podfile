@@ -8,7 +8,6 @@ target 'Chat' do
   # Pods for Chat
 
   pod 'SnapKit', '5.6.0'
-  pod 'Alamofire', '5.7.1'
   pod 'Kingfisher', '7.8.0'
   pod 'SwiftGen', '6.6.2'
 

@@ -19,7 +19,7 @@ enum AuthScreenType {
 
 final class AppController {
     
-    static let shared = AppController()
+    private static let shared = AppController()
     
     private var window: UIWindow? {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -34,7 +34,12 @@ final class AppController {
         }
     }
     
-    func openModule(_ type: ScreenType) {
+    
+    static func openModule(_ type: ScreenType) {
+        shared._openModule(type)
+    }
+    
+    private func _openModule(_ type: ScreenType) {
         switch type {
         case .auth(.registration):
             let presenter = AuthPresenter()
@@ -47,7 +52,11 @@ final class AppController {
             presenter.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
         case .chatList:
-            let vc = ChatViewController()
+            let router = ChatListRouterImpl()
+            let presenter = ChatListPresenterImpl(router: router)
+            let vc = ChatListViewController(presenter: presenter)
+            presenter.view = vc
+            router.view = vc
             rootViewController = UINavigationController(rootViewController: vc)
         }
     }

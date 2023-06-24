@@ -10,11 +10,11 @@ import Foundation
 struct Chat: Codable {
     let uuid: UUID
     let companions: [User]
-    let lastMessage: LastMessage?
+    let lastMessage: Message?
     let chatLogo: URL?
 
     private enum CodingKeys: String, CodingKey {
-        case uuid = "id"
+        case uuid
         case companions
         case chatLogo = "chat_logo"
         case lastMessage = "last_message"

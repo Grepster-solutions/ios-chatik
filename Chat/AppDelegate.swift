@@ -14,17 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootController = UINavigationController(rootViewController: makeRootView())
-        window?.rootViewController = rootController
         window?.makeKeyAndVisible()
+        startApp()
         return true
     }
-
-    private func makeRootView() -> UIViewController {
-        let presenter = AuthPresenter()
-        let view = AuthViewController(presenter: presenter, screenType: .registration)
-        presenter.view = view
-        return view
+    
+    private func startApp() {
+        if UserDefaultsManager.currentUser != nil {
+            AppController.openModule(.chatList)
+        } else {
+            AppController.openModule(.auth(.login))
+        }
     }
 }
 

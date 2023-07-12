@@ -10,20 +10,12 @@ import Foundation
 
 enum NetworkService {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let apiVersion = "1.0"
-        static let baseUrl = "https://api.grepster.ru/\(apiVersion)"
-    }
-    
-    
     // MARK: - Interface
     
     static func makeRequest<T: Decodable>(requestRouter: AbstractRequestRouter,
                                           modelType: T.Type,
                                           completion: @escaping (Result<T, NetworkError>) -> ()) {
-        guard let url = URL(string: Constants.baseUrl + requestRouter.path) else {
+        guard let url = URL(string: NetworkConstants.baseUrl + requestRouter.path) else {
             return
         }
         

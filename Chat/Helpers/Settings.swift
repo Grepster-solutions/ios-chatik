@@ -21,7 +21,7 @@ final class UserDefaultsManager {
             return try? JSONDecoder().decode(User.self, from: data)
         }
         set {
-            if let data = try? JSONEncoder().encode(newValue) {
+            if let newValue, let data = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.set(data, forKey: Keys.user.rawValue)
             } else {
                 UserDefaults.standard.removeObject(forKey: Keys.user.rawValue)

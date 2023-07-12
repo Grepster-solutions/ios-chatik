@@ -40,28 +40,15 @@ final class AuthController {
     }
     
     class func logout() {
-        let requestRouter = AuthRequestRouter.logout
-        NetworkService.makeRequest(requestRouter: requestRouter,
-                                   modelType: Bool.self) { result in
-            switch result {
-            case .success:
-                guard ((try? localLogout()) != nil) else {
-                    print("local logout failure")
-                    return
-                }
-                
-                print("logout success")
-            case .failure(let error):
-                print("error in logout: ", error.localizedDescription)
-            }
-        }
+        try? localLogout()
     }
     
     private class func localLogout() throws {
         guard let currentUser = UserDefaultsManager.currentUser else { return }
         try KeychainPasswordItem(service: serviceTokenName,
                                  account: currentUser.email).deleteItem()
-        NotificationCenter.default.post(name: .didLogout, object: nil)
+        UserDefaultsManager.currentUser = nil
+        AppController.openModule(.auth(.login))
     }
 }
 

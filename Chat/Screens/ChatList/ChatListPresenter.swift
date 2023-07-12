@@ -15,6 +15,7 @@ protocol ChatListPresenter {
     func start()
     
     func didTapPlusButton()
+    func didTapLogout()
     
 }
 
@@ -52,6 +53,9 @@ extension ChatListPresenterImpl: ChatListPresenter {
     
     func start() {
         view?.setTableService(tableService)
+        tableService.onChatSelect = { [weak router] chat in
+            router?.openChat(with: chat.uuid)
+        }
         
         reloadChats()
     }
@@ -89,10 +93,15 @@ extension ChatListPresenterImpl: UsersForChatDelegate {
             switch result {
             case .success(let chat):
                 self.reloadChats()
+                self.router.openChat(with: chat.uuid)
             case .failure(let error):
                 print("Huge mistake: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func didTapLogout() {
+        AuthController.logout()
     }
     
 }

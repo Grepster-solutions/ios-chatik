@@ -10,5 +10,7 @@ target 'Chat' do
   pod 'SnapKit', '5.6.0'
   pod 'Kingfisher', '7.8.0'
   pod 'SwiftGen', '6.6.2'
+  pod 'Socket.IO-Client-Swift', '16.0.1'
+  pod 'ReverseExtension'
 
 end

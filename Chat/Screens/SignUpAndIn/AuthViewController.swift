@@ -36,6 +36,7 @@ class AuthViewController: UIViewController {
         return label
     }()
     
+    private weak var gradientLayer: CAGradientLayer?
     private(set) lazy var logoView = LogoView()
     private(set) lazy var textFieldsView = TextFieldsView()
     private(set) lazy var mainButtonsView = MainButtonsView()
@@ -59,12 +60,6 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: .didLogout,
-                                               object: nil,
-                                               queue: .main) { [weak self] _ in
-            self?.screenType = .registration
-        }
-        
         updateTitle(screenType: screenType)
         textFieldsView.updateView(screenType: screenType)
         mainButtonsView.updateView(screenType: screenType)
@@ -77,10 +72,11 @@ class AuthViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        backgroundView.setGradient(colors: [UIColor(named: .purple), UIColor(named: .darkBlue)],
-                                   locations: [0.0, 1.0],
-                                   startPoint: CGPoint(x: 0, y: 0),
-                                   endPoint: CGPoint(x: 1, y: 1))
+        gradientLayer?.frame = view.bounds
+        gradientLayer = backgroundView.makeGradient(colors: [UIColor(named: .purple), UIColor(named: .darkBlue)],
+                                                    locations: [0.0, 1.0],
+                                                    startPoint: CGPoint(x: 0, y: 0),
+                                                    endPoint: CGPoint(x: 1, y: 1))
     }
     
     

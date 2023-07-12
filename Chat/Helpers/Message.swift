@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum MessageContentType {
+    case text
+    case photo
+    case video
+    case audio
+}
+
 enum MessageType: String, Codable {
     case outcoming
     case incoming
@@ -14,8 +21,12 @@ enum MessageType: String, Codable {
 }
 
 struct Message: Codable {
-    let type: MessageType
     let text: String
     let timestamp: Double
     let uuid: UUID
+    let author: User?
+}
+
+struct ChatOnAddMessage: Codable {
+    let message: Message
 }

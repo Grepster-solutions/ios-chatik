@@ -23,6 +23,11 @@ class ChatListViewController: UIViewController {
     private let presenter: ChatListPresenter
     
     private let tableView = UITableView()
+    private lazy var logoutButton: UIButton = .create { button in
+        button.setTitle("Logout", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(didTapLogout), for: .touchUpInside)
+    }
     
     private lazy var plusButton: UIButton = {
         let button = UIButton()
@@ -64,14 +69,16 @@ class ChatListViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupLayout() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        view.addSubviews([tableView, logoutButton])
+        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        logoutButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-12)
+        }
     }
     
     private func setNavBarButton() {
@@ -84,6 +91,11 @@ class ChatListViewController: UIViewController {
     @objc
     private func didTapPlusButton() {
         presenter.didTapPlusButton()
+    }
+    
+    @objc
+    private func didTapLogout() {
+        presenter.didTapLogout()
     }
     
 }

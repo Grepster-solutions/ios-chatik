@@ -20,30 +20,32 @@ enum UserRequestRouter: AbstractRequestRouter {
     
     var path: String {
         switch self {
-        case .currentUser:
-            return "/current_user"
-        case .usersForChat:
-            return "/users_for_chats"
+        case .currentUser, .usersForChat:
+            return "/users"
         }
     }
     
-     var headers: HTTPHeaders {
-         guard let token = AuthController.getToken() else {
-             return ["Content-Type": "application/json"]
-         }
-         switch self {
-         case .currentUser:
-             return ["Content-Type": "application/json",
-                     "x-access-token" : "\(token)"]
-         case .usersForChat:
-             return ["x-access-token" : "\(token)"]
-         }
+    var headers: HTTPHeaders {
+        guard let token = AuthController.getToken() else {
+            return ["Content-Type": "application/json"]
+        }
+        switch self {
+        case .currentUser, .usersForChat:
+            return ["Content-Type": "application/json",
+                    "x-access-token" : "\(token)"]
+        }
     }
     
     var parameters: HTTPParameters? {
+        return nil
+    }
+    
+    var arguments: HTTPArguments? {
         switch self {
-        case .currentUser, .usersForChat:
-            return nil
+        case .currentUser:
+            return ["type": "current"]
+        case .usersForChat:
+            return ["type": "newChatOnly"]
         }
     }
     

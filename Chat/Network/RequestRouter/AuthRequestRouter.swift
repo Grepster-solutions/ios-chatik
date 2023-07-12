@@ -60,5 +60,9 @@ enum AuthRequestRouter: AbstractRequestRouter {
         }
     }
     
+    var arguments: HTTPArguments? {
+        return nil
+    }
+    
 }
 

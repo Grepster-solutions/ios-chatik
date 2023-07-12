@@ -15,7 +15,16 @@ enum NetworkService {
     static func makeRequest<T: Decodable>(requestRouter: AbstractRequestRouter,
                                           modelType: T.Type,
                                           completion: @escaping (Result<T, NetworkError>) -> ()) {
-        guard let url = URL(string: NetworkConstants.baseUrl + requestRouter.path) else {
+        guard var urlComps = URLComponents(string: NetworkConstants.baseUrl + requestRouter.path) else {
+            return
+        }
+        
+        let queryItems = (requestRouter.arguments ?? [:]).map {
+            return URLQueryItem(name: $0.key, value: $0.value)
+        }
+        
+        urlComps.queryItems = queryItems
+        guard let url = urlComps.url else {
             return
         }
         

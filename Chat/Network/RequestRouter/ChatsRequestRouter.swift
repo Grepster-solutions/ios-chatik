@@ -46,4 +46,8 @@ enum ChatsRequestRouter: AbstractRequestRouter {
         }
     }
     
+    var arguments: HTTPArguments? {
+        return nil
+    }
+    
 }
